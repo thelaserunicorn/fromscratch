@@ -1,1 +1,1 @@
-## ML and DL algos from scratch
+### ML and DL algos from scratch
