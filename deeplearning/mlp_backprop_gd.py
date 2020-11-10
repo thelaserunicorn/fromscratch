@@ -44,7 +44,6 @@ class MLP(object):
             activations.append(a)
         self.activations = activations
 
-
     def forward_propagate(self, inputs):
         """Computes forward propagation of the network based on input signals.
 
@@ -74,7 +73,6 @@ class MLP(object):
         # return output layer activation
         return activations
 
-
     def back_propagate(self, error):
         """Backpropogates an error signal.
         Args:
@@ -99,14 +97,14 @@ class MLP(object):
             current_activations = self.activations[i]
 
             # reshape activations as to have them as a 2d column matrix
-            current_activations = current_activations.reshape(current_activations.shape[0],-1)
+            current_activations = current_activations.reshape(
+                current_activations.shape[0], -1)
 
             # save derivative after applying matrix multiplication
             self.derivatives[i] = np.dot(current_activations, delta_re)
 
             # backpropogate the next error
             error = np.dot(delta, self.weights[i].T)
-
 
     def train(self, inputs, targets, epochs, learning_rate):
         """Trains model running forward prop and backprop
@@ -144,8 +142,7 @@ class MLP(object):
         print("Training complete!")
         print("=====")
 
-
-    def gradient_descent(self, learningRate=1):
+    def gradient_descent(self, learning_rate=1):
         """Learns by descending the gradient
         Args:
             learningRate (float): How fast to learn.
@@ -154,8 +151,7 @@ class MLP(object):
         for i in range(len(self.weights)):
             weights = self.weights[i]
             derivatives = self.derivatives[i]
-            weights += derivatives * learningRate
-
+            weights += derivatives * learning_rate
 
     def _sigmoid(self, x):
         """Sigmoid activation function
@@ -168,7 +164,6 @@ class MLP(object):
         y = 1.0 / (1 + np.exp(-x))
         return y
 
-
     def _sigmoid_derivative(self, x):
         """Sigmoid derivative function
         Args:
@@ -177,7 +172,6 @@ class MLP(object):
             y (float): Output
         """
         return x * (1.0 - x)
-
 
     def _mse(self, target, output):
         """Mean Squared Error loss function
@@ -203,13 +197,12 @@ if __name__ == "__main__":
     mlp.train(items, targets, 50, 0.1)
 
     # create dummy data
-    input = np.array([0.3, 0.1])
-    target = np.array([0.4])
+    input = np.array([0.3, 0.2])
+    target = np.array([0.5])
 
     # get a prediction
     output = mlp.forward_propagate(input)
 
     print()
-    print("Our network believes that {} + {} is equal to {}".format(input[0], input[1], output[0]))
-
-
+    print(
+        "Our network believes that {} + {} is equal to {}".format(input[0], input[1], output[0]))
