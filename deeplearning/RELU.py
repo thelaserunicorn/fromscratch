@@ -1,8 +1,6 @@
 import numpy as np
 
+inputs = [0, 1, -1, 1.1, -2]
+outputs = np.maximum(0, inputs)
 
-class Activation_ReLU:
-    # Forward Pass
-    def forward(self, inputs):
-        # Calculating output values from inputs
-        self.output = np.maximum(0, inputs)
+print("The output of the network is: {}".format(outputs))
